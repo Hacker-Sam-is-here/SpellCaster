@@ -1,0 +1,414 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=MedievalSharp&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-darkblue-1: rgba(3,7,80,255);
+  --color-darkblue-2: rgba(8,12,150,255);
+  --color-darkblue-3: #004572;
+  --color-darkblue-4: #004f82;
+
+  --color-lightblue-1: #00c6e0;
+  --color-lightblue-2: #009cc0;
+  --color-lightblue-3: #12ffff;
+  --color-lightblue-4: #5282f2;
+  --color-lightblue-5: #00c1db;
+
+  --color-magenta-1: #d34ff5;
+  --color-magenta-2: #b334f5;
+  --color-magenta-3: #6700aa;
+
+  --color-white-1: #FDFDFD;
+
+  --color-black-1: #000a16;
+
+
+  --color-tile-accent: #ffddc8;
+  --color-red-1 : #ff0000;
+
+  --color-white: #ffffff;
+
+  --color-yellow-1: #fff069;
+
+  --soft-shadow-1: 0px 5px 15px rgba(0,0,0,0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  box-sizing: border-box;
+  color: var(--color-white-1);
+}
+
+body {
+  overflow-x: hidden;
+  background-color: blue;
+}
+
+.show-border {
+  border: 2px solid pink;
+}
+
+.frosted-glass {
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+  background-color: rgba(255, 255, 255, .07);
+  
+  /* backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); */
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* main page */
+
+.content {
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+/* navbar */
+.navbar {
+}
+
+.title-gradient {
+  background: linear-gradient(0deg, var(--color-lightblue-4) 0%, var(--color-lightblue-3) 100%);
+  background-size: 100% 100%;
+  background-clip: text;
+  color: transparent;
+}
+
+h1, h1 > *{
+  font-family: MedievalSharp;  
+}
+
+h1 {
+  filter: drop-shadow(0px 3px 0px #000000);
+}
+
+/* gameboard */
+
+.gameboard {
+  position: relative;
+}
+
+.gameboard-outline {
+  margin: 0 auto;
+  width: 38rem;
+  height: 45em;
+  background-color: var(--color-lightblue-5);
+  border-radius: 3.25rem;
+  border: 0.35rem solid var(--color-darkblue-4);
+  box-shadow: var(--soft-shadow-1);
+}
+
+.gameboard-fill {
+  background-color: var(--color-black-1);
+  border: 0.35rem solid var(--color-darkblue-4);
+  border-radius: 2rem;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+.gameboard-fill-2 {
+  background-color: var(--color-black-1);
+  border: 0.35rem solid var(--color-darkblue-4);
+  border-radius: 2rem;
+  width: 100%;
+  height:100%;
+}
+
+.gameboard-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 1.1rem;
+}
+
+.gameboard-tile-grid-item {
+  aspect-ratio: 1/1;
+  border-radius: 1rem;
+  background-color: var(--color-white);
+  border: 0.35rem solid var(--color-tile-accent);
+  color: black;
+}
+
+.gameboard-run-button {
+  position: absolute;
+  background-color: var(--color-magenta-1);
+  width: 18rem;
+  height: 4rem;
+  left: 50%;
+  top: 98%;
+  border-radius: 2rem;
+  transform: translateX(-50%);
+  border: 0.4rem solid var(--color-magenta-3);
+}
+
+.gameboard-options-buttons {
+  color: var(--color-black-1);
+  aspect-ratio: 1/1;
+  border-radius: 0.5rem;
+  background-color: var(--color-white);
+  border: 0.3rem solid var(--color-tile-accent);
+}
+
+.numswaps-button {
+  width: 12rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-lightblue-5);
+  border: 0.3rem solid var(--color-darkblue-4);
+}
+
+.gameboard-tile-input {
+  width: 80%;
+  aspect-ratio: 1/1;
+  border: none; /* Remove default border */
+  text-align: center; /* Center text horizontally */
+  font-size: 2rem; /* Adjust font size as needed */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.clear-board-button {
+  color: var(--color-white);
+  background-color: var(--color-magenta-1);
+  border: 0.3rem solid var(--color-magenta-3);
+}
+
+.selected-DL-tile {
+  position: relative;
+}
+
+.selected-DL-tile::after {
+  content: "DL";
+  position: absolute;
+  background-color: var(--color-black-1);
+  color: var(--color-white);
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 0.2rem solid var(--color-yellow-1);
+  left: 100%;
+  top: -50%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.selected-2x-tile {
+  position: relative;
+  border-color: var(--color-magenta-1);
+}
+
+.selected-2x-tile::after {
+  content: "2X";
+  position: absolute;
+  background-color: var(--color-black-1);
+  color: var(--color-white);
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 0.2rem solid var(--color-magenta-1);
+  left: 100%;
+  top: -50%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.selected-2x-tile.selected-DL-tile {
+  border-color: var(--color-magenta-1);
+}
+
+.selected-2x-tile.selected-DL-tile::after {
+  content: "DL";
+  position: absolute;
+  background-color: var(--color-black-1);
+  color: var(--color-white);
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 0.2rem solid var(--color-yellow-1);
+  left: 0%;
+  top: -50%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.selected-2x-tile.selected-DL-tile::before {
+  content: "2X";
+  position: absolute;
+  background-color: var(--color-black-1);
+  color: var(--color-white);
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 0.2rem solid var(--color-magenta-1);
+  left: 100%;
+  top: -50%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+input[type="number"] {
+  color: var(--color-black-1);
+  border: 0.3rem solid var(--color-darkblue-4);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+/* results */
+
+.result-card {
+  width: 100%;
+  background-color: var(--color-lightblue-5);
+  border-radius: 2.25rem;
+  border: 0.35rem solid var(--color-darkblue-4);
+}
+
+.results-word-score {
+  padding: 2rem 0;
+  background-color: var(--color-black-1);
+  width: 45%;
+  max-width: 45%;
+  height: 100%;
+  max-height: 100rem;
+  border-radius: 1rem;
+  border: 0.35rem solid var(--color-darkblue-4);
+}
+
+.result-word-points {
+  color: var(--color-yellow-1);
+}
+
+.results-board {
+  padding: 2rem 0;
+  min-width: 350px;
+  max-width: 53%;
+  width: 58%;
+  height: 100%;
+  background-color: var(--color-black-1);
+  border-radius: 1rem;
+  border: 0.35rem solid var(--color-darkblue-4);
+}
+
+
+.grid-container {
+  position: relative;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+
+
+.grid-cell {
+  z-index: 1;
+  border-radius: 0.5rem;
+  width: 65px; /* Adjust size as needed */
+  height: 65px; /* Adjust size as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-white); /* Adjust border as needed */
+}
+
+.grid-svg {
+  pointer-events: none; /* Ensures SVG does not block interactions with the grid */
+}
+
+.res-grid-dl {
+  border-color: var(--color-yellow-1);
+  color: var(--color-yellow-1);
+}
+
+.res-grid-2x {
+  border-color: var(--color-magenta-1);
+  color: var(--color-magenta-1);
+}
+
+.res-grid-start {
+  border-color: var(--color-red-1);
+  color: var(--color-red-1);
+}
+
+.res-grid-swaps {
+  border-color: var(--color-lightblue-1);
+  color: var(--color-lightblue-1);
+}
+
+
+.small-screen {
+  display: none;
+}
+
+/* responsiveness */
+@media (max-width: 900px) {
+  /* no use for devices this small */
+  /* .small-screen {
+    display: block;
+  } */
+}
+
+@media(max-width: 850px) {
+  .result-card {
+    flex-wrap: wrap;
+    flex-direction: columns;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .results-word-score {
+    width: 100%;
+    max-width: 200rem;
+  }
+  .results-board {
+    width: 100%;
+    max-width: 200rem;
+  }
+}
+
+@media(max-width: 730px) {
+  .gameboard-outline {
+    margin: 0 auto;
+    width: 30rem;
+    height: 36em;
+  }
+  .content {
+    max-width: 95%;
+  }
+  .gameboard-tile-grid {
+    gap: 0.3rem;
+  }
+  .gameboard-outline {
+    padding: 1rem;
+  }
+
+}
+
+@media(max-width: 530px) {
+  .gameboard-outline {
+    margin: 0 auto;
+    width: 25rem;
+    height: 31em;
+  }
+}

@@ -22,7 +22,12 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: |
+          echo "Checking public directory content..."
+          ls -la public/assets/
+          npm run build
+          echo "Checking build output..."
+          ls -la dist/assets/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
